@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { ListCtx } from "../contexts/ListCtx";
+
 
 function JobItems(props) {
-  const { item, hdlDel, hdlEdit } = props;
+  const { item } = props;
+  const { hdlDel, hdlEdit } = useContext(ListCtx);
   const [editMode, setEditMode] = useState(false);
   const [editText, setEditText] = useState("");
 
@@ -10,13 +13,22 @@ function JobItems(props) {
   }, [editMode, item.name]);
 
   const hdlSaveClick = () => {
-    hdlEdit(item.id, editText)
-    setEditMode(false)
-  }
+    hdlEdit(item.id, editText);
+    setEditMode(false);
+  };
 
   return (
     <div className="col-md-8">
       <div className="input-group">
+        <div className="input-group-text">
+          <input
+            className="form-check-input mt-0"
+            type="checkbox"
+            value=""
+            checked={item.status}
+            onChange={()=>hdlEdit(item.id, "_STATUS")}
+          />
+        </div>
         <input
           className="form-control"
           type="text"

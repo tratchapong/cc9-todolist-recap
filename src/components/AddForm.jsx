@@ -1,7 +1,9 @@
 import React,{useState} from "react";
+import { useLists } from "../contexts/ListCtx";
 
 function Addform(props) {
-  const {hdlAdd} = props
+  // const ctx = useContext(ListCtx)
+  const {hdlAdd} = useLists()
   const [text, setText] = useState('')
 
   const hdlAddClick = () => {
